@@ -1,4 +1,4 @@
-public class CircularBuffer {
+public class CircularBuffer<T> {
 
    private int size;
 
@@ -9,5 +9,6 @@ public class CircularBuffer {
    public int getSize() {
       return this.size;
    }
+
 
 }
