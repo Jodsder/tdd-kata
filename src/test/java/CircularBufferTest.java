@@ -40,9 +40,28 @@ public class CircularBufferTest {
    @Test
    public void canAddAndRemoveElementX() {
       //Unsure how to correclty test the generic type of circular buffer
-      CircularBuffer<String> buffer = new CircularBuffer<String>(5);
+      CircularBuffer<Integer> buffer = new CircularBuffer<Integer>(5);
       buffer.add(2);
       assertEquals(2, buffer.remove());
+   }
+
+   @Test
+   public void writeXYZToBufferWithSize2_ExpectYZInBuffer() {
+      CircularBuffer<Integer> buffer = new CircularBuffer<Integer>(2);
+      int x = 1;
+      int y = 2;
+      int z = 3;
+      buffer.add(x);
+      buffer.add(y);
+      buffer.add(z);
+      assertEquals(y, buffer.remove());
+      assertEquals(z, buffer.remove());
+      assertThrows(BufferUnderflowException.class, new Executable() {
+         @Override
+         public void execute() throws Throwable {
+            buffer.remove();
+         }
+      });
    }
 
 }
