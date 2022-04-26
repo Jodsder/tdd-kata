@@ -64,4 +64,26 @@ public class CircularBufferTest {
       });
    }
 
+   @Test
+   public void writeXYZTToBufferWithSize2_ExpectZTInBuffer() {
+      CircularBuffer<Integer> buffer = new CircularBuffer<Integer>(2);
+      int x = 1;
+      int y = 2;
+      int z = 3;
+      int t = 4;
+      buffer.add(x);
+      buffer.add(y);
+      buffer.add(z);
+      buffer.add(t);
+
+      assertEquals(z, buffer.remove());
+      assertEquals(t, buffer.remove());
+      assertThrows(BufferUnderflowException.class, new Executable() {
+         @Override
+         public void execute() throws Throwable {
+            buffer.remove();
+         }
+      });
+   }
+
 }
