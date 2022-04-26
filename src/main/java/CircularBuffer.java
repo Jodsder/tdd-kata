@@ -1,3 +1,5 @@
+import java.nio.BufferUnderflowException;
+
 public class CircularBuffer<T> {
 
    private int size;
@@ -8,6 +10,10 @@ public class CircularBuffer<T> {
 
    public int getSize() {
       return this.size;
+   }
+
+   public T remove() throws BufferUnderflowException{
+      throw new BufferUnderflowException();
    }
 
 

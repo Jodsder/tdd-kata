@@ -1,12 +1,13 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.nio.BufferUnderflowException;
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CircularBufferTest {
+
    @Test
    public void circularBufferInitialzedEmpty() {
       CircularBuffer<Integer> buffer = new CircularBuffer<Integer>(0);
@@ -27,8 +28,13 @@ public class CircularBufferTest {
 
    @Test
    public void readingEmptyBufferThrowsException() {
-      CircularBuffer<String> buffer = new CircularBuffer<String>(5);
-      assertThrows(BufferUnderflowException.class, buffer.remove());
+      assertThrows(BufferUnderflowException.class, new Executable() {
+         @Override
+         public void execute() throws Throwable {
+            CircularBuffer<String> buffer = new CircularBuffer<String>(5);
+            buffer.remove();
+         }
+      });
    }
 
 }
