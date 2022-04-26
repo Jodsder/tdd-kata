@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 
+import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +19,16 @@ public class CircularBufferTest {
       assertEquals(5, buffer.getSize());
    }
 
+   @Test
    public void initializeWithGenericTypeString() {
       //Unsure how to correclty test the generic type of circular buffer
       CircularBuffer<String> buffer = new CircularBuffer<String>(5);
    }
+
+   @Test
+   public void readingEmptyBufferThrowsException() {
+      CircularBuffer<String> buffer = new CircularBuffer<String>(5);
+      assertThrows(BufferUnderflowException.class, buffer.remove());
+   }
+
 }
